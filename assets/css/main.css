@@ -2634,7 +2634,7 @@ input, select, textarea {
 			color: #fff;
 			display: inline-block;
 			opacity: 0;
-			padding: 3em 3.2em;
+			padding: 3em 3em;
 			text-align: center;
 			border-radius: 20px;
 			backdrop-filter: blur(3px);
@@ -2643,9 +2643,9 @@ input, select, textarea {
 
 			#banner .inner header {
 				display: inline-block;
-				border-bottom: solid 2px;
-				border-top: solid 2px;
-				margin: 0 0 2em 0;
+				/* border-bottom: solid 2px; */
+				/* border-top: solid 2px; */
+				margin: 0 0 1.6em 0;
 				padding: 3px 0 3px 0;
 			}
 
@@ -2654,9 +2654,14 @@ input, select, textarea {
 					border-top: solid 2px;
 					font-size: 2.5em;
 					font-weight: 600;
-					letter-spacing: 0.1em;
+					/* letter-spacing: 0.1em; */
+					letter-spacing: 0.08em;
 					margin: 0;
-					padding-left: 0.05em;
+					padding-left: 0.4em;
+					padding-right: 0.3em;
+					padding-top: 0.3em;
+					padding-bottom: 0.3em;
+					/* padding: 0em auto; */
 					position: relative;
 					text-transform: uppercase;
 				}
@@ -2665,6 +2670,8 @@ input, select, textarea {
 				letter-spacing: 0.1em;
 				margin: 0;
 				text-transform: uppercase;
+				/* padding-bottom: 0.5em; */
+
 			}
 
 				#banner .inner p a {
