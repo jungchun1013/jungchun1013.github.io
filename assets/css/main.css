@@ -80,14 +80,30 @@ input, select, textarea {
 	--wrapper-color: rgb(252, 252, 252);
 	--text-color: rgb(119, 122, 123);
 	--primary-color: rgb(200, 232, 255);
-	--primary-color-a: rgba(204, 234, 255,0.55);
+	--primary-color-a: rgba(200, 232, 255,0.55);
+	
 	/* --accent-color: rgb(75, 165, 240); */
-	--accent-color: rgb(72, 162, 230);
+	--accent-color: rgb(60, 150, 220);
+
+	/* dodger blue */
+	--accent-color: rgb(28, 134, 238); 
+	/* SkyBlue2 */
+	--accent-color: rgb(126, 192, 238);
+	/* SkyBlue2 */
+	--accent-color: rgb(108, 166, 205);
+	/* SteelBlue2 */
+	--accent-color: rgb(92, 172, 238);
+	/* SteelBlue3 */
+	--accent-color: rgb(79, 148, 205);
 	/* color: #3fb1a3; */
 	/* color: rgb(215, 240, 255); */
 	/* color: rgb(75, 168, 226); */
 	/* link color */
 	/* color: rgb(105, 168, 254);*/
+
+	/* final */
+	--accent-color: rgb(78, 160, 220);
+
 }
 
 /* Basic */
