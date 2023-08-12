@@ -1,0 +1,10 @@
+@article{liu2022assessing,
+  title={Assessing perceptual load and cognitive load by fixation-related information of eye movements},
+  author={Liu, Jung-Chun and Li, Kuei-An and Yeh, Su-Ling and Chien, Shao-Yi},
+  journal={Sensors},
+  volume={22},
+  number={3},
+  pages={1187},
+  year={2022},
+  publisher={MDPI}
+}

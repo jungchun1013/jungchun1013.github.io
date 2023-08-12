@@ -1,0 +1,7 @@
+@inproceedings{fang2023gp,
+  title={GP with Ranging-Binding Technique for Symbolic Regression},
+  author={Fang, Wen-Zhong and Chang, Chi-Hsien and Liu, Jung-Chun and Yu, Tian-Li},
+  booktitle={Proceedings of the Companion Conference on Genetic and Evolutionary Computation},
+  pages={563--566},
+  year={2023}
+}

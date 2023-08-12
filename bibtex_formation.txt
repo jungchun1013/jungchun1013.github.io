@@ -1,0 +1,8 @@
+@inproceedings{liu2022multi,
+  title={Multi-Robot Formation Control using Collective Behavior Model and Reinforcement Learning},
+  author={Liu, Jung-Chun and Liu, Tsung-Te},
+  booktitle={2022 IEEE International Symposium on Circuits and Systems (ISCAS)},
+  pages={2261--2265},
+  year={2022},
+  organization={IEEE}
+}
