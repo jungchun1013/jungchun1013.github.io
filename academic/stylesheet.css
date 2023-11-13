@@ -84,6 +84,21 @@ a {
   font-size: 14px;
 }
 
+p {
+  line-height: 17pt;
+}
+
+p a, p span {
+  line-height: inherit;
+}
+
+
+li,
+em {
+  font-family: 'Lato', Verdana, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
 strong {
   font-family: 'Lato', Verdana, Helvetica, sans-serif;
   font-size: 14px;
