@@ -210,12 +210,13 @@ input, select, textarea {
 		margin: 0 0 1em 0;
 		/* margin: 0 0 0 0; */
 	}
+	ul {margin-left: 0.5em;}
 
 	h1, h2, h3, h4, h5, h6 {
 		color: inherit;
 		font-weight: 300;
 		line-height: 1.75em;
-		margin-bottom: 1em;
+		margin-bottom: 0.5em;
 		text-transform: uppercase;
 	}
 
@@ -264,7 +265,7 @@ input, select, textarea {
 	.container {
 		margin: 0 auto;
 		max-width: 100%;
-		width: 1800px;
+		width: 1200px;
 	}
 
 		.container.medium {
@@ -2835,7 +2836,7 @@ input, select, textarea {
 	#footer {
 		background: var(--primary-color-a);
 		color: var(--text-color);
-		padding: 5em 5em 10em 5em;
+		padding: 2em 2em 4em 2em;
 		text-align: center;
 	}
 

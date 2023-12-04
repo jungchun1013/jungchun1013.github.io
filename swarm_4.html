@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<!--
+	Twenty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Swarm Intelligence: A Reading Note</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/idea-sharing.png">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="no-sidebar is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header">
+					<h1 id="logo"><a href="index.html">Jung-Chun Liu 劉容均</a></h1>
+
+					<nav id="nav">
+						<ul>
+							<li class="menu"><a href="index.html">Home</a></li>
+								<!-- <li class="menu"><a href="research.html">Research</a></li> -->
+								<li class="menu"><a href="academic/index.html">Academic</a></li>
+								<li class="menu"><a href="publication.html">Publication</a></li>
+								<!-- <li class="menu"><a href="index.html">TA</a></li> -->
+							<!-- <li class="menu"><a href="index.html">Writing</a></li> -->
+							<li class="current"><a href="activities.html">Misc</a></li>
+							<li class="menu"><a href="CV_Jung_Chun_Liu_2023_1130.pdf">CV</a></li>
+							</li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<article id="main">
+
+					<header class="special container">
+						<span class="icon solid fa-lightbulb"></span>
+						<h2><strong>Swarm Intelligence: A Reading Note</strong></h2>
+						<!-- <p>Where that in the center faces the nameless horrors alone.</p> -->
+					</header>
+					<section class="wrapper style4 container">
+						<div class="row gtr-50">
+							<div class="content", style="text-align:justify;">
+
+								<header>
+									<h2>Chapter 4: Symbolism and Connectionism</h2>
+								</header>
+
+								<p>How can we imbue machines with intelligence? To answer this, we need to reflect on how humans think. Humans do not directly process external stimuli; instead, they first convert these stimuli into mental representations and then process them. Cognitive science divides the functioning of the mind into two schools: computationalism and connectionism; similarly, artificial intelligence categorizes the operational methods of machines into symbolism and connectionism.</p>
+
+								<p>Computationalism or symbolism focuses on the representations themselves, with the brain or computer performing formal operations and connections on these symbols. Traditional symbolic AI processes representations using tree structures and excels in decision-related problems. For instance, to open a door, one would first consider if the door is locked, then find a key if it is, or turn the doorknob if it isn't. Breaking down the problem into smaller ones and solving them sequentially is how this type of AI functions. However, tree structures lack feedback, and connections only represent their sequence, not the strength or direction of the link. Symbolism also fails to explain all mental operations. For example, the Semantic Network proposed by Richard H. Richens links semantic concepts in a network, but this model cannot explain the representativeness effect, where confirming "a penguin is a bird" takes longer than confirming "a canary is a bird." Under the Semantic Network's assumption, both should take the same time since they are both linked to the concept of a bird.</p>
+
+								<p>Connectionism traces its roots back to empiricism, which believes that we induce reasoning from phenomena to form concepts, leading to associationism, constructing and developing knowledge through association based on experiences. David Hume's mental chemistry contends that the most fundamental process of knowledge is connection, combining simple concepts into complex ones through linkage. Modern AI's connectionism originates from Rumelhart and McClelland's (1986) parallel distributed processing model. They posited that the mind could be represented by a network similar to the neural system, the precursor to neural networks. Neural networks take cues from the structure of biological neural systems, with units and connections corresponding to neurons and synapses in the neural system. Each connection has a weight, representing the relevance between connections, and mental representations are the states formed by the output of the neural network. A key feature of these units is activation; when input exceeds a certain threshold, the unit is activated and outputs 1, otherwise 0, resembling the all-or-nothing law in the nervous system. The Hebbian rule suggests that innate connections between neurons are necessary for learning, with experience serving to strengthen these connections. The engineer's task is to establish these innate connections in machines and allow them to learn from acquired information. The difference between semantic networks and neural networks is that in semantic networks, each unit is a semantic concept, whereas in neural networks, the semantic concept is the state represented by multiple units.</p>
+								
+								<p>The design of neural networks often draws from psychological theories. For instance, meta-learning, which teaches machines how to learn – autonomously adjusting parameters or structures – is inspired by human metacognition (Jackson, 2004). Google's research division's 2017 paper "Attention is all you need" (Vaswani et al., 2017), cited over twenty thousand times, added an attention mechanism to neural networks, allowing machines to focus on specific phrases in lengthy audio messages for precise processing, trained using neural networks. DeepMind's "Machine Theory of Mind" (Rabinowitz et al., 2018) used neural networks to train a theory of mind. Although the experiments were still within a grid world context, enabling machines to understand others could be a significant breakthrough in human-machine interaction. Recently, neural network technology has rapidly advanced, with the most advanced neural networks operating beyond human comprehension. Meta-learning allows neural networks to autonomously generate neurons and neural systems, and we lack sufficient theoretical foundations to explain the meanings of parameters. Ali Rahimi, the 2017 NeurIPS Test of Time award winner, even likened deep learning training to "alchemy" in his speech. As mentioned earlier, the mind possesses randomness stemming from our ignorance; perhaps in some way, such neural networks can already be considered to have a mind.</p>
+								<p>Symbolism and connectionism each have their strengths and applications in AI. AlphaGO initially uses the Monte Carlo tree search algorithm, a symbolic tree search method, where computational power can be significantly advantageous. However, when searching unknown states, the thousands of possibilities are beyond even supercomputers. At this point, AlphaGO switches to a deep neural network, quickly obtaining results with a model pre-trained using game records (Silver et al., 2016).</p>
+								<p>Next: <a class="link" href="swarm_5.html" >Chapter 5: Connections Between People</a></p>
+								<!-- <footer>
+									<ul class="buttons">
+										<li><a href="#" class="button">Find Out More</a></li>
+									</ul>
+								</footer> -->
+							</div>
+						</div>
+					</section>
+				</article>
+
+			<!-- Footer -->
+				<footer id="footer">
+
+					<!-- <ul class="icons">
+						<li><a href="#" class="icon brands circle fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands circle fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands circle fa-google-plus-g"><span class="label">Google+</span></a></li>
+						<li><a href="#" class="icon brands circle fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon brands circle fa-dribbble"><span class="label">Dribbble</span></a></li>
+					</ul> -->
+
+					<ul class="copyright">
+						<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
