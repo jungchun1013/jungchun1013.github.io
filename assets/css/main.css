@@ -60,6 +60,10 @@ section, summary, time, mark, audio, video {
 	/* scroll-behavior: smooth; */
 }
 
+em {
+	font-style: italic;
+}
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -3115,9 +3119,9 @@ input, select, textarea {
 
 		/* Wrapper */
 
-			.wrapper.special-alt {
+			/* .wrapper.special-alt {
 				text-align: center;
-			}
+			} */
 
 			.wrapper.style4 {
 				padding-bottom: 3em;
