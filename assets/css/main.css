@@ -60,7 +60,7 @@ section, summary, time, mark, audio, video {
 	/* scroll-behavior: smooth; */
 }
 
-em {
+em, i {
 	font-style: italic;
 }
 
