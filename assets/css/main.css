@@ -115,7 +115,8 @@ input, select, textarea {
 :root {
 	--bg-color: rgba(243, 245, 250);
 	--wrapper-color: rgb(252, 252, 252);
-	--text-color: rgb(119, 122, 123);
+	/* --text-color: rgb(119, 122, 123); */
+	--text-color: rgb(105, 108, 109);
 	--primary-color: rgb(200, 232, 255);
 	--primary-color-a: rgba(200, 232, 255,0.55);
 	
@@ -173,7 +174,7 @@ input, select, textarea {
 		body, input, select, textarea {
 		/* color: #7c8081; */
 		color: var(--text-color);
-		font-family: 'Lato', sans-serif;
+		font-family: sans-serif, 'Lato', sans-serif;
 		/* font-family: Calibri, 'Lato', sans-serif; */
 		font-weight: 300;
 		/* font-weight: 400; */
@@ -217,12 +218,20 @@ input, select, textarea {
 	}
 	ul {margin-left: 0.5em;}
 
-	h1, h2, h3, h4, h5, h6 {
+	h1, h2 {
 		color: inherit;
-		font-weight: 300;
-		line-height: 1.75em;
+		font-weight: 400;
+		line-height: 1.5em;
 		margin-bottom: 0.5em;
 		text-transform: uppercase;
+		font-family: 'Lato', sans-serif;
+	}
+	h3, h4, h5, h6 {
+		color: inherit;
+		font-weight: 400;
+		line-height: 1.5em;
+		margin-bottom: 0.5em;
+		font-family: 'Lato', sans-serif;
 	}
 
 		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
@@ -233,7 +242,7 @@ input, select, textarea {
 
 	h2 {
 		font-size: 20pt;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.05em;
 	}
 
 	h3 {
@@ -2468,6 +2477,7 @@ input, select, textarea {
 			right: 2.5em;
 			top: 0.75em;
 			text-transform: uppercase;
+			font-family: 'Lato', sans-serif
 		}
 
 			#header nav ul {
