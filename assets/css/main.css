@@ -2921,7 +2921,7 @@ input, select, textarea {
 	#footer {
 		background: var(--primary-color-a);
 		color: var(--text-color);
-		padding: 2em 2em 4em 2em;
+		padding: 2em 2em 2em 2em;
 		text-align: center;
 	}
 
