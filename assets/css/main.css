@@ -3826,7 +3826,9 @@ input, select, textarea {
     overflow: hidden;
 	letter-spacing: 0.02em;
 	padding-top: 0.5em;
+	line-height: 1.6em;
 }
+
 
 .typed-text > span {
 	font-family: 'MesloLGM Nerd Font Mono','Menlo', monospace !important;
