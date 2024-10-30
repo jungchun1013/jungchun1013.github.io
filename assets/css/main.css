@@ -2187,12 +2187,12 @@ input, select, textarea {
 						color: #fff;
 					}
 				.icon.circle.fa-envelope {
-					color: #B0B0B0;
+					color: #A0A0A0;
 					background: #fff;
 				}
 
 					.icon.circle.fa-envelope:hover {
-						background: #909090;
+						background: #888888;
 						color: #fff;
 					}
 	
