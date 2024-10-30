@@ -2186,7 +2186,16 @@ input, select, textarea {
 						background: #000000;
 						color: #fff;
 					}
+				.icon.circle.fa-envelope {
+					color: #B0B0B0;
+					background: #fff;
+				}
 
+					.icon.circle.fa-envelope:hover {
+						background: #909090;
+						color: #fff;
+					}
+	
 		.icon.featured {
 			cursor: default;
 			display: block;
