@@ -3765,6 +3765,42 @@ input, select, textarea {
 	}
 }
 
+.prof-item {
+	display: flex;
+}
+
+.prof-date {
+	width: 200px;
+	min-width: 200px;
+	text-align: right;
+	padding-right: 1.5em; 
+	font-weight: 500;
+}
+
+.prof-content {
+	width:auto;
+}
+
+@media screen and (max-width: 736px) {
+	.prof-item {
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 1em;
+		
+	}
+	.prof-date {
+		width: 200px;
+		min-width: 200px;
+		text-align: left;
+		padding-right: 1.5em; 
+		font-weight: 500;
+	}
+	.prof-content {
+		width: 100%;
+	}
+}
+
+
 .academ-pub {
 	padding-bottom: 2em;
 	/* display: flex; */
