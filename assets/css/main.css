@@ -2254,6 +2254,8 @@ input, select, textarea {
 
 		ol li {
 			padding-left: 0.25em;
+			padding-top: 0.25em;
+
 		}
 
 	ul {
@@ -2263,6 +2265,7 @@ input, select, textarea {
 
 		ul li {
 			padding-left: 0.5em;
+			padding-top: 0.25em;
 		}
 
 /* Icons */
@@ -2457,7 +2460,7 @@ input, select, textarea {
 		margin-bottom: 3em;
 		/* margin-bottom: 4em; */
 		/* padding: 5em; */
-		padding: 3rem 3rem;
+		padding: 3rem 4.5rem;
 	}
 
 		.wrapper.style1 {
