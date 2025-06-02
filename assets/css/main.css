@@ -2598,10 +2598,10 @@ input, select, textarea {
 			}
 
 		#header nav {
-			letter-spacing: 0.075em;
+			letter-spacing: 0.06em;
 			position: absolute;
 			right: 2.5em;
-			top: 0.75em;
+			top: 0.6em;
 			text-transform: uppercase;
 			font-family: 'Lato', sans-serif
 		}
@@ -2718,16 +2718,21 @@ input, select, textarea {
 				#header.alt nav ul li.active > a, #header.alt nav ul li:hover > a {
 					border: solid 1px;
 				}
+				#header #logo {
+					left: 0em;
+					top: 0.6em;
+				}
+
 				#header #logo.active > a, #header #logo:hover > a, #header #logo:focus > a {
 					/* color: rgb(172, 219, 253); */
 					/* color: rgb(255, 255, 255); */
 					/* font-weight: 600; */
 					border-bottom: none;
 					text-decoration: none;
-					letter-spacing: 0.075em;
+					letter-spacing: 0.06em;
 					position: absolute;
 					left: 0em;
-					top: 0.75em;
+					top: 0.6em;
 					text-transform: none;
 					font-family: 'Lato', sans-serif
 				}
