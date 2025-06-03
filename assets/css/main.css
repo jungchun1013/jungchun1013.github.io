@@ -2460,7 +2460,8 @@ input, select, textarea {
 		margin-bottom: 3em;
 		/* margin-bottom: 4em; */
 		/* padding: 5em; */
-		padding: 3rem 4.5rem;
+		/* padding: 3rem 4.5rem; */
+		padding: 3rem 7.5rem;
 	}
 
 		.wrapper.style1 {
@@ -3711,19 +3712,25 @@ input, select, textarea {
 
 	/* #main-academ */
 	#banner-academ {
+		background-image: url("images/dark-bl.svg"), url("images/dark-br.svg");
 		/* background-image: url("images/dark-tl.svg"), url("images/dark-tr.svg"), url("images/dark-bl.svg"), url("images/dark-br.svg"); */
-		/* background-position: top left, top right, bottom left, bottom right; */
+		background-position: bottom left, bottom right;
 		background-repeat: no-repeat;
-		padding-top: 4em;
-		padding-bottom: 1.5em;
-		margin-bottom: -3em;
+		/* padding-top: 4em; */
+		padding-top: 7em;
+		padding-bottom: 1em;
+		/* margin-bottom: -3em; */
 		font-weight: 400;
 		color: #212529;
+		letter-spacing: 0.02em;
+
 	}
 
 	#main-academ {
-		/* background-image: url("images/dark-tl.svg"), url("images/dark-tr.svg"), url("images/dark-bl.svg"), url("images/dark-br.svg"); */
-		/* background-position: top left, top right, bottom left, bottom right; */
+		/* background-image: url("images/dark-bl.svg"), url("images/dark-br.svg"); */
+		background-image: url("images/dark-tl.svg"), url("images/dark-tr.svg"), url("images/dark-bl.svg"), url("images/dark-br.svg");
+		/* background-position: bottom left, bottom right; */
+		background-position: top left, top right, bottom left, bottom right;
 		background-repeat: no-repeat;
 		padding-bottom: 3em;
 		padding-top: 3em;
