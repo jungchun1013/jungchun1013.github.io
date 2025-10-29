@@ -2845,7 +2845,7 @@ input, select, textarea {
 		background-attachment: scroll, scroll, fixed, fixed;
 		background-color: #888e92;
 		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/banner1.jpeg");
-		background-position: bottom left, bottom right, top left, top center;
+		background-position: bottom left, bottom right, top left, bottom center;
 		background-repeat: no-repeat, no-repeat, repeat, no-repeat;
 		background-size: 25em, 25em, auto, cover;
 		color: #fff;
