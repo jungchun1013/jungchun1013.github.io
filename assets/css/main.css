@@ -149,6 +149,13 @@ input, select, textarea {
 	/* final */
 	--accent-color: rgb(78, 160, 220);
 
+	--lg-bg-color: rgba(255, 255, 255, 0.25);
+	--lg-highlight: rgba(255, 255, 255, 0.75);
+	--lg-text: #ffffff;
+	--lg-hover-glow: rgba(255, 255, 255, 0.4);
+	--lg-red: #fb4268;
+	--lg-grey: #5b5b5b;
+
 }
 
 /* Basic */
@@ -2835,7 +2842,7 @@ input, select, textarea {
 	}
 
 	#banner {
-		background-attachment: scroll, scroll, scroll, fixed;
+		background-attachment: scroll, scroll, fixed, fixed;
 		background-color: #888e92;
 		background-image: url("images/light-bl.svg"), url("images/light-br.svg"), url("images/overlay.png"), url("../../images/banner1.jpeg");
 		background-position: bottom left, bottom right, top left, top center;
@@ -2846,7 +2853,7 @@ input, select, textarea {
 		width:inherit;
 		height: 100vh;
 		/* padding: 6em 0; */
-		padding: 30vh 0 32vh 0;
+		padding: 36vh 0 30vh 0;
 		text-align: center;
 	}
 
@@ -2855,11 +2862,12 @@ input, select, textarea {
 			-webkit-animation: reveal-banner 1s 0.25s ease-in-out;
 			-ms-animation: reveal-banner 1s 0.25s ease-in-out;
 			animation: reveal-banner 1s 0.25s ease-in-out;
+			
 			-moz-animation-fill-mode: forwards;
 			-webkit-animation-fill-mode: forwards;
 			-ms-animation-fill-mode: forwards;
 			animation-fill-mode: forwards;
-			background: var(--primary-color-a);
+			/* background: var(--primary-color-a); */
 			color: #fff;
 			display: inline-block;
 			opacity: 0;
@@ -2868,7 +2876,7 @@ input, select, textarea {
 			/* padding: 4em 3em; */
 			text-align: center;
 			border-radius: 20px;
-			backdrop-filter: blur(3px);
+			/* backdrop-filter: blur(3px); */
 			/* width: inherit; */
 			/* height: ((1/1.618)*100)vw;	 */
 			/* aspect-ratio: 1.65 / 1; */
@@ -3933,3 +3941,76 @@ input, select, textarea {
         opacity: 1;
     }
 }
+
+/* ========== CONTAINER ========== */
+.g-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .g-container--inline {
+	flex-direction: row;
+  }
+
+	.glass-container {
+		position: relative;
+		/* display: flex; */
+		display: inline-block;
+
+		font-weight: 600;
+		color: var(--lg-text);
+		cursor: pointer;
+		background: transparent;
+		border-radius: 2rem;
+		overflow: hidden;
+		box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+		transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+	}
+
+/* ========== GLASS LAYERS ========== */
+	.glass-filter {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		backdrop-filter: blur(1px);
+		/* background: rgba(255,255,255,0.1); */
+		filter: url(#lg-dist);
+		/* filter: url(#test-distortion); */
+		isolation: isolate;
+		/* background: rgba(255,255,255,0.1); */
+	}
+  
+  .glass-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 11;
+	background: var(--lg-bg-color);
+
+  }
+  
+  .glass-specular {
+	position: absolute;
+	inset: 0;
+	z-index: 12;
+	border-radius: inherit;
+	overflow: hidden;
+	box-shadow: inset 1px 1px 0 var(--lg-highlight),
+	  inset 0 0 5px var(--lg-highlight);
+  }
+  
+  .glass-content {
+	position: relative;
+	z-index: 13;
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	padding: 1rem 1.5rem 0.9rem;
+  }
+  
+  .glass-content--inline {
+	padding: 0.25rem 2rem 0.25rem 0.75rem;
+	flex: 1 1 auto;
+	justify-content: space-between;
+  }
