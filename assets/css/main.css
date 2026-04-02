@@ -116,7 +116,6 @@ input, select, textarea {
 }
 
 :root {
-	--bg-color: rgba(243, 245, 250);
 	--bg-color: rgba(241, 242, 246);
 	/* --bg-color: rgb(245, 243, 248); */
 
@@ -127,25 +126,6 @@ input, select, textarea {
 	--primary-color: rgb(200, 232, 255);
 	--primary-color-a: rgba(200, 232, 255,0.55);
 	
-	/* --accent-color: rgb(75, 165, 240); */
-	--accent-color: rgb(60, 150, 220);
-
-	/* dodger blue */
-	--accent-color: rgb(28, 134, 238); 
-	/* SkyBlue2 */
-	--accent-color: rgb(126, 192, 238);
-	/* SkyBlue2 */
-	--accent-color: rgb(108, 166, 205);
-	/* SteelBlue2 */
-	--accent-color: rgb(92, 172, 238);
-	/* SteelBlue3 */
-	--accent-color: rgb(79, 148, 205);
-	/* color: #3fb1a3; */
-	/* color: rgb(215, 240, 255); */
-	/* color: rgb(75, 168, 226); */
-	/* link color */
-	/* color: rgb(105, 168, 254);*/
-
 	/* final */
 	--accent-color: rgb(78, 160, 220);
 
@@ -188,7 +168,7 @@ input, select, textarea {
 		body, input, select, textarea {
 		/* color: #7c8081; */
 		color: var(--text-color);
-		font-family: sans-serif, 'Lato', sans-serif;
+		font-family: 'Lato', sans-serif;
 		/* font-family: Calibri, 'Lato', sans-serif; */
 		font-weight: 300;
 		/* font-weight: 400; */
@@ -3078,7 +3058,7 @@ input, select, textarea {
 			.wrapper {
 				margin-bottom: 3em;
 				/* padding: 3em; */
-				padding: 3rem, 2rem;
+				padding: 3rem 2rem;
 				/* padding: 4em 3em; */
 			}
 
@@ -3109,11 +3089,6 @@ input, select, textarea {
 
 			#footer {
 				padding: 2em;
-			}
-		
-			img .pa {
-				width: 80% !important;
-				height: auto !important;
 			}
 
 	}
@@ -3713,10 +3688,6 @@ input, select, textarea {
 
 /* self define*/
 
-.bio {
-	width: 840px;
-	max-width: 840px;
-}
 
 	/* #main-academ */
 	#banner-academ {
@@ -3950,9 +3921,6 @@ input, select, textarea {
 	justify-content: center;
   }
   
-  .g-container--inline {
-	flex-direction: row;
-  }
 
 	.glass-container {
 		position: relative;
@@ -4009,8 +3977,3 @@ input, select, textarea {
 	padding: 1rem 1.5rem 0.9rem;
   }
   
-  .glass-content--inline {
-	padding: 0.25rem 2rem 0.25rem 0.75rem;
-	flex: 1 1 auto;
-	justify-content: space-between;
-  }
