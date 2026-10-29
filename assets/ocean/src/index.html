@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ocean — WebGPU</title>
 <style>
-  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; overscroll-behavior: none; }
   #c { position: fixed; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; z-index: 0; }
   #hud { position: fixed; z-index: 10; left: 12px; top: 10px; font: 12px/1.45 ui-monospace, Consolas, monospace; color: #e8e2d6;
          text-shadow: 0 1px 2px #000a; pointer-events: none; user-select: none; }
   #hud .help { opacity: .7; }
-  #panel { position: fixed; z-index: 10; right: 12px; top: 10px; max-height: calc(100vh - 84px); overflow-y: auto; box-sizing: border-box; width: 300px; padding: 10px 12px; border-radius: 8px;
+  #panel { position: fixed; z-index: 10; right: 12px; top: 10px; max-height: calc(100vh - 84px); overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; width: 300px; padding: 10px 12px; border-radius: 8px;
            background: #0b0f14c8; backdrop-filter: blur(6px); color: #e5e1d8; font: 12px/1.3 system-ui, sans-serif; }
   #panel.hidden { display: none; }
   #panel label { display: grid; grid-template-columns: 1fr 110px 40px; gap: 6px; align-items: center; margin: 3px 0; }

@@ -116,7 +116,7 @@ input, select, textarea {
 }
 
 :root {
-	--bg-color: rgba(241, 242, 246);
+	--bg-color: rgb(232, 233, 240); /* hsl(228, 22%, 92.5%): was rgb(241,242,246), L -3 */
 	/* --bg-color: rgb(245, 243, 248); */
 
 	--wrapper-color: rgb(252, 252, 252);
@@ -136,7 +136,91 @@ input, select, textarea {
 	--lg-red: #fb4268;
 	--lg-grey: #5b5b5b;
 
+	--portrait-shadow: rgba(173, 181, 189, 0.75);
 }
+
+/* Dark scheme: same lightness/saturation steps as the light one, mirrored. Background is a
+   purple-tinted dark grey, the primary a pink-purple, text white. Set by assets/js/theme.js. */
+:root[data-theme="dark"] {
+	--bg-color: #201C27;                        /* hsl(262, 17%, 13%) */
+	--wrapper-color: #292433;                   /* hsl(262, 18%, 17%) */
+	--text-color: #F2EEF7;
+	--primary-color: #E6A3FF;                   /* pink-purple */
+	--primary-color-a: rgba(135, 84, 156, 0.55); /* header / footer tint: hsl(283, 30%, 47%) */
+	--accent-color: #E6A3FF;                   /* hsl(284, 100%, 82%) */
+	--portrait-shadow: rgba(0, 0, 0, 0.55);
+}
+
+	/* page-specific surfaces that were hard-coded white / near-black */
+	:root[data-theme="dark"] #banner-academ,
+	:root[data-theme="dark"] #main-academ {
+		color: var(--text-color);
+	}
+	:root[data-theme="dark"] #main-academ,
+	:root[data-theme="dark"] .wrapper.style4 {
+		background-color: var(--wrapper-color);
+	}
+	/* corner line decorations: white lines belong on dark surfaces, black lines on light ones, so
+	   the two sets swap places in the dark scheme */
+	:root[data-theme="dark"] .wrapper.style2 {
+		background-image: url("images/dark-bl.svg"), url("images/dark-br.svg");
+	}
+	:root[data-theme="dark"] #main {
+		background-image: url("images/light-tl.svg"), url("images/light-tr.svg"), url("images/light-bl.svg"), url("images/light-br.svg");
+	}
+	:root[data-theme="dark"] #main-academ {
+		background-image: url("images/light-tl.svg"), url("images/light-tr.svg"), url("images/light-bl.svg"), url("images/light-br.svg");
+	}
+	:root[data-theme="dark"] .academic-pub-img-container {
+		background-color: #FFF;
+		border-radius: 6px;
+	}
+
+	/* Easter egg: in the dark scheme the stage photo on the Life page spills its light onto the
+	   card around it, like the haze catching the rig — a blurred copy of the same photo sits
+	   behind the image and breathes slowly. */
+	.theatre {
+		position: relative;
+		display: inline-block;
+		line-height: 0;
+		border-radius: 6px;
+	}
+		.theatre img {
+			position: relative;
+			z-index: 1;
+		}
+		.theatre::before {
+			content: "";
+			position: absolute;
+			inset: -6%;
+			z-index: 0;
+			pointer-events: none;
+			border-radius: 12px;
+			background: url("../../images/light.jpeg") center / cover no-repeat;
+			filter: blur(28px) saturate(1.6) brightness(1.15);
+			opacity: 0;
+			transform: scale(1.04);
+			transition: opacity 1.4s ease;
+		}
+		:root[data-theme="dark"] .theatre::before {
+			opacity: 0.85;
+			animation: theatre-spill 6s ease-in-out infinite;
+		}
+
+	@keyframes theatre-spill {
+		0%, 100% { opacity: 0.85; transform: scale(1.04); }
+		50% { opacity: 0.6; transform: scale(1.09); }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		:root[data-theme="dark"] .theatre::before { animation: none; }
+	}
+
+	:root.theme-transition body,
+	:root.theme-transition #header,
+	:root.theme-transition #footer,
+	:root.theme-transition .wrapper {
+		transition: background-color 0.6s ease, color 0.6s ease;
+	}
 
 /* Basic */
 
@@ -1993,7 +2077,7 @@ input, select, textarea {
 		margin: 0px auto;
 		width: 240px;
 		border-radius: 15%;
-		box-shadow: 5px 5px 25px rgba(173, 181, 189, 0.75);
+		box-shadow: 5px 5px 25px var(--portrait-shadow);
 		aspect-ratio: 1 / 1;
 		margin: auto;
 		object-fit: cover;
@@ -2874,9 +2958,38 @@ input, select, textarea {
 			z-index: 1;
 		}
 
+		/* daytime theme: colour under the ocean before it loads */
+		:root[data-theme="light"] #banner {
+			background-color: #9fcbea;
+		}
+
+		/* theme switch: the new scene fades in over the old one */
+		#banner .ocean-frame, #banner .ocean-canvas {
+			transition: opacity 0.8s ease;
+		}
+		#banner .ocean-enter, #banner .ocean-leave {
+			opacity: 0;
+		}
+
+		/* theme toggle in the nav */
+		#header nav ul li.theme a {
+			padding-left: 0.6em;
+			padding-right: 0.6em;
+		}
+
+			#header nav ul li.theme a:before {
+				font-size: 1.05em;
+				vertical-align: middle;
+			}
+
 		#banner > .down {
 			z-index: 1;
+			pointer-events: none; /* the full-width strip must not block the ocean (tuning panel) */
 		}
+
+			#banner > .down a {
+				pointer-events: auto;
+			}
 
 		#banner .inner {
 			-moz-animation: reveal-banner 1s 0.25s ease-in-out;
@@ -2954,7 +3067,7 @@ input, select, textarea {
 				position: absolute;
 				left: 0;
 				right: 0;
-				bottom: 1.5em;
+				bottom: 3.5em;
 				width: 100%;
 				-moz-animation: reveal-banner 1s 0.25s ease-in-out;
 				-webkit-animation: reveal-banner 1s 0.25s ease-in-out;

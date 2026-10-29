@@ -723,13 +723,17 @@ async function main() {
     btn.addEventListener('click', () => {
       outp.value = dump();
       outp.select();
-      if (navigator.clipboard) navigator.clipboard.writeText(outp.value).then(() => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy settings', 1200); }).catch(() => {});
+      const done = () => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy settings', 1200); };
+      // clipboard API needs a permission the embedding page may not grant; fall back to execCommand,
+      // and the textarea below keeps the string selected for manual copying either way
+      const legacy = () => { try { if (document.execCommand('copy')) done(); } catch (e) {} };
+      if (navigator.clipboard) navigator.clipboard.writeText(outp.value).then(done).catch(legacy); else legacy();
     });
     panel.append(btn, outp);
   }
   if (qs.get('ui') === '0') { document.getElementById('hud').style.display = 'none'; panel.classList.add('hidden'); }
   if (qs.get('panel') === '1') panel.classList.remove('hidden');
-  if (qs.get('panelTop')) panel.style.top = Number(qs.get('panelTop')) + 'px';
+  if (qs.get('panelTop')) { const t = Number(qs.get('panelTop')); panel.style.top = t + 'px'; panel.style.maxHeight = 'calc(100vh - ' + (t + 12) + 'px)'; }
 
   const hudFps = document.getElementById('fps');
 

@@ -10,8 +10,14 @@
 	var banner = document.getElementById('banner');
 	if (!banner) return;
 
+	// ---------------------------------------------------------------- theme
+	// 'dark' = magic hour, 'light' = daytime in the site's primary/accent blues. The scheme itself
+	// is owned by theme.js (nav toggle, localStorage, system preference); we follow it.
+	var theme = (window.siteTheme && window.siteTheme.get()) || document.documentElement.getAttribute('data-theme') || 'dark';
+
 	// ---------------------------------------------------------------- web-ocean (WebGPU)
-	var SCENE = {
+	var SCENES = {};
+	SCENES.dark = {
 		ui: 0,
 		cam: '0,2.6,0,0,-5.5',  // x,y,z,yawDeg,pitchDeg: fixed cover camera
 		float: 0,               // never let passing crests lift the camera
@@ -43,25 +49,66 @@
 		sssCol: '7d447e',
 		sssK: 1
 	};
+	SCENES.light = Object.assign({}, SCENES.dark, {
+		windSpeed: 3.2,
+		windDir: 118,
+		fetchKm: 50,
+		swellHs: 1.2,
+		swellLength: 240,
+		swellDir: 90,
+		choppy: 1.1,
+		turbidity: 0.88,
+		foam: 0.32,
+		sunElev: 7.6,
+		sunAzim: 12.5,
+		haze: 3,
+		clouds: 0,
+		veil: 0,
+		warmth: -0.4,
+		grade: 0.4,
+		exposure: 0.9,
+		bloom: 0.024,
+		vignette: 0.4,
+		gradeKnee: 0.81,
+		skyGrad: 0.36,
+		skyGradHorizon: 0.6,
+		sky0: '4473c1',
+		sky1: '85c4ff',
+		sky2: 'c2e88c',
+		sky3: 'fff3a3',
+		waterCol: '19344d',
+		waterK: 1.9,
+		sssCol: 'f9a3ff',
+		sssK: 1.4
+	});
 
-
-
-
-
+	// WebGL fallback palette, same roles as the web-ocean stops (linear-ish RGB and sun direction)
+	var GL_PALETTES = {
+		dark: { sunDir: '0.35, 0.0741, 1.0', sun: '1.000, 0.812, 0.459', skyTop: '0.141, 0.161, 0.400', skyMid: '0.722, 0.380, 0.475', skyHor: '1.000, 0.718, 0.322', seaBase: '0.051, 0.102, 0.188', seaWater: '0.235, 0.443, 0.486' },
+		light: { sunDir: '0.35, 0.141, 1.0', sun: '1.000, 0.953, 0.639', skyTop: '0.267, 0.451, 0.757', skyMid: '0.522, 0.769, 1.000', skyHor: '0.761, 0.910, 0.549', seaBase: '0.098, 0.204, 0.302', seaWater: '0.976, 0.639, 1.000' }
+	};
 
 	// ?tune=1 on the page: show web-ocean's settings panel inside the banner (card and nav
 	// stay in place) and make the iframe clickable so the sliders work.
 	var TUNE = /[?&]tune=1/.test(location.search);
 
-	function startWebGPU(onFail) {
+	function startWebGPU(onFail, onReady) {
 		var dpr = window.devicePixelRatio || 1;
 		// FFT ocean is GPU-heavy: render at about 60% of device resolution and let CSS scale it
 		var scale = 0.6;
-		var params = Object.assign({}, SCENE, {
+		var params = Object.assign({}, SCENES[theme], {
 			w: Math.max(640, Math.round(banner.clientWidth * dpr * scale)),
 			h: Math.max(360, Math.round(banner.clientHeight * dpr * scale))
 		});
-		if (TUNE) Object.assign(params, { ui: 0, panel: 1, panelTop: 72, look: 0 });
+		if (TUNE) {
+			Object.assign(params, { ui: 0, panel: 1, panelTop: 72, look: 0 });
+			// any other query parameter overrides the scene, so launchers can open a different palette
+			location.search.slice(1).split('&').forEach(function (kv) {
+				var i = kv.indexOf('='); if (i < 0) return;
+				var k = decodeURIComponent(kv.slice(0, i));
+				if (k !== 'tune' && k !== 'r') params[k] = decodeURIComponent(kv.slice(i + 1));
+			});
+		}
 		var q = Object.keys(params).map(function (k) { return k + '=' + encodeURIComponent(params[k]); }).join('&');
 
 		var frame = document.createElement('iframe');
@@ -69,14 +116,17 @@
 		frame.setAttribute('aria-hidden', 'true');
 		frame.setAttribute('tabindex', '-1');
 		frame.setAttribute('title', 'ocean');
+		frame.setAttribute('allow', 'clipboard-write');
 		frame.src = 'assets/ocean/ocean.html?' + q;
 		if (TUNE) frame.style.pointerEvents = 'auto';
-		banner.insertBefore(frame, banner.firstChild);
+		frame.classList.add('ocean-enter');
+		var prev = banner.querySelector('.ocean-frame, .ocean-canvas');
+		if (prev) banner.insertBefore(frame, prev.nextSibling); else banner.insertBefore(frame, banner.firstChild);
 		banner.classList.add('has-ocean');
 
-		var failed = false;
+		var failed = false, stopped = false;
 		function fail() {
-			if (failed) return; failed = true;
+			if (failed || stopped) return; failed = true;
 			frame.remove();
 			onFail();
 		}
@@ -87,33 +137,64 @@
 		function post(msg) { try { frame.contentWindow.postMessage(msg, '*'); } catch (e) {} }
 		var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		var visible = true;
-		function sync() { post((reduced || !visible || document.hidden) ? 'ocean:pause' : 'ocean:resume'); }
+		// in tune mode never pause: a paused renderer makes the panel look dead
+		function sync() { post((!TUNE && (reduced || !visible || document.hidden)) ? 'ocean:pause' : 'ocean:resume'); }
 		if ('IntersectionObserver' in window) {
 			new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; sync(); }, { threshold: 0 }).observe(banner);
 		}
 		document.addEventListener('visibilitychange', sync);
-		frame.addEventListener('load', function () { setTimeout(sync, reduced ? 2500 : 0); });
+		frame.addEventListener('load', function () {
+			setTimeout(sync, reduced ? 2500 : 0);
+			// give the FFT a moment to settle, then fade in over the previous scene
+			setTimeout(function () { frame.classList.remove('ocean-enter'); if (onReady) onReady(); }, 900);
+		});
+		return function stop() {
+			stopped = true;
+			frame.classList.add('ocean-leave');
+			setTimeout(function () { frame.remove(); }, 900);
+		};
 	}
 
-	if (navigator.gpu && navigator.gpu.requestAdapter) {
-		navigator.gpu.requestAdapter({ powerPreference: 'high-performance' }).then(function (adapter) {
-			if (adapter) startWebGPU(startWebGL); else startWebGL();
-		}, startWebGL);
-	} else {
-		startWebGL();
+	var stopCurrent = null;
+	function start(onReady) {
+		var gen = ++startGen;
+		var ready = onReady || function () {};
+		function webgl() { if (gen === startGen) { stopCurrent = startWebGL(ready); if (!stopCurrent) ready(); } }
+		if (navigator.gpu && navigator.gpu.requestAdapter) {
+			navigator.gpu.requestAdapter({ powerPreference: 'high-performance' }).then(function (adapter) {
+				if (gen !== startGen) return;
+				if (adapter) stopCurrent = startWebGPU(webgl, ready); else webgl();
+			}, webgl);
+		} else {
+			webgl();
+		}
+	}
+	var startGen = 0;
+	start();
+
+	if (window.siteTheme) {
+		window.siteTheme.onChange(function (t) {
+			if (t === theme) return;
+			theme = t;
+			// crossfade: the old scene keeps running underneath until the new one has loaded
+			var old = stopCurrent; stopCurrent = null;
+			start(function () { if (old) old(); });
+		});
 	}
 
 	// ---------------------------------------------------------------- WebGL1 fallback
-	function startWebGL() {
+	function startWebGL(onReady) {
+	var PAL = GL_PALETTES[theme];
 
 	var canvas = document.createElement('canvas');
-	canvas.className = 'ocean-canvas';
+	canvas.className = 'ocean-canvas ocean-enter';
 	canvas.setAttribute('aria-hidden', 'true');
-	banner.insertBefore(canvas, banner.firstChild);
+	var prev = banner.querySelector('.ocean-frame, .ocean-canvas');
+	if (prev) banner.insertBefore(canvas, prev.nextSibling); else banner.insertBefore(canvas, banner.firstChild);
 
 	var gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' })
 		|| canvas.getContext('experimental-webgl');
-	if (!gl) { canvas.remove(); return; }
+	if (!gl) { canvas.remove(); return null; }
 
 	var VERT = [
 		'attribute vec2 a_pos;',
@@ -133,14 +214,14 @@
 		'const float SEA_FREQ = 0.16;',
 		'const mat2 OCT = mat2(1.6, 1.2, -1.2, 1.6);',
 
-		// magic-hour palette
-		'const vec3 SUN_DIR_RAW = vec3(0.35, 0.0741, 1.0);',  // 4 deg above the horizon
-		'const vec3 SUN_COL   = vec3(1.000, 0.812, 0.459);',
-		'const vec3 SKY_TOP   = vec3(0.141, 0.161, 0.400);',
-		'const vec3 SKY_MID   = vec3(0.722, 0.380, 0.475);',
-		'const vec3 SKY_HOR   = vec3(1.000, 0.718, 0.322);',
-		'const vec3 SEA_BASE  = vec3(0.051, 0.102, 0.188);',
-		'const vec3 SEA_WATER = vec3(0.235, 0.443, 0.486);',
+		// palette for the active theme (dark: sun 4 deg above the horizon; light: 12 deg)
+		'const vec3 SUN_DIR_RAW = vec3(' + PAL.sunDir + ');',
+		'const vec3 SUN_COL   = vec3(' + PAL.sun + ');',
+		'const vec3 SKY_TOP   = vec3(' + PAL.skyTop + ');',
+		'const vec3 SKY_MID   = vec3(' + PAL.skyMid + ');',
+		'const vec3 SKY_HOR   = vec3(' + PAL.skyHor + ');',
+		'const vec3 SEA_BASE  = vec3(' + PAL.seaBase + ');',
+		'const vec3 SEA_WATER = vec3(' + PAL.seaWater + ');',
 
 		'float hash(vec2 p){ float h = dot(p, vec2(127.1, 311.7)); return fract(sin(h) * 43758.5453123); }',
 		'float noise(vec2 p){',
@@ -312,7 +393,7 @@
 
 	var vs = compile(gl.VERTEX_SHADER, VERT);
 	var fs = compile(gl.FRAGMENT_SHADER, FRAG);
-	if (!vs || !fs) { canvas.remove(); return; }
+	if (!vs || !fs) { canvas.remove(); return null; }
 
 	var prog = gl.createProgram();
 	gl.attachShader(prog, vs);
@@ -320,7 +401,7 @@
 	gl.linkProgram(prog);
 	if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
 		console.error('[ocean] link error:', gl.getProgramInfoLog(prog));
-		canvas.remove(); return;
+		canvas.remove(); return null;
 	}
 	gl.useProgram(prog);
 
@@ -374,5 +455,15 @@
 
 	banner.classList.add('has-ocean');
 	kick();
+	setTimeout(function () { canvas.classList.remove('ocean-enter'); if (onReady) onReady(); }, 300);
+	return function stop() {
+		canvas.classList.add('ocean-leave');
+		setTimeout(function () {
+			if (raf) cancelAnimationFrame(raf); raf = 0;
+			visible = false;
+			var lose = gl.getExtension('WEBGL_lose_context'); if (lose) lose.loseContext();
+			canvas.remove();
+		}, 900);
+	};
 	}
 })();
