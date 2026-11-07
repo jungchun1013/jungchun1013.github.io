@@ -4178,6 +4178,8 @@ input, select, textarea {
 
 	.feature-split .feature-cat {
 		padding: 0.5em 1.5em;
+		text-align: center;
+		align-self: center;
 	}
 
 	.feature-split .feature-cat img {
