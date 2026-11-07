@@ -4136,6 +4136,78 @@ input, select, textarea {
 	padding: 1rem 1.5rem 0.9rem;
   }
 
+
+/* Feature split (Resource page: Games / Gallery cards, 7:3) */
+
+	.feature-split {
+		display: flex;
+		align-items: center;
+		gap: 2em;
+	}
+
+	.feature-split .feature-text {
+		flex: 7 1 0;
+		min-width: 0;
+	}
+
+	.feature-split .feature-visual {
+		flex: 3 1 0;
+		min-width: 0;
+		display: block;
+		border: 0;
+		line-height: 0;
+		text-decoration: none;
+		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.feature-split .feature-visual img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.feature-split .feature-photo {
+		border-radius: 6px;
+		overflow: hidden;
+	}
+
+	.feature-split .feature-photo:hover {
+		transform: scale(1.03);
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+	}
+
+	.feature-split .feature-cat {
+		padding: 0.5em 1.5em;
+	}
+
+	.feature-split .feature-cat img {
+		image-rendering: pixelated;
+		image-rendering: crisp-edges;
+		max-width: 192px;
+		margin: 0 auto;
+	}
+
+	.feature-split .feature-cat:hover {
+		transform: scale(1.08);
+	}
+
+	@media screen and (max-width: 736px) {
+		.feature-split {
+			flex-direction: column;
+			gap: 1em;
+		}
+
+		.feature-split .feature-text,
+		.feature-split .feature-visual {
+			flex: none;
+			width: 100%;
+		}
+
+		.feature-split .feature-photo {
+			max-width: 320px;
+		}
+	}
+
 /* Gallery */
 
 	.gallery-grid {
