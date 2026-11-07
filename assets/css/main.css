@@ -4146,14 +4146,17 @@ input, select, textarea {
 	}
 
 	.feature-split .feature-text {
-		flex: 7 1 0;
+		flex: 7 1 0%;
 		min-width: 0;
 	}
 
 	.feature-split .feature-visual {
-		flex: 3 1 0;
+		flex: 3 1 0%;
 		min-width: 0;
-		display: block;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-self: center;
 		border: 0;
 		line-height: 0;
 		text-decoration: none;
@@ -4178,15 +4181,14 @@ input, select, textarea {
 
 	.feature-split .feature-cat {
 		padding: 0.5em 1.5em;
-		text-align: center;
-		align-self: center;
 	}
 
 	.feature-split .feature-cat img {
 		image-rendering: pixelated;
 		image-rendering: crisp-edges;
-		max-width: 192px;
-		margin: 0 auto;
+		width: 192px;
+		max-width: 100%;
+		height: auto;
 	}
 
 	.feature-split .feature-cat:hover {
